@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Mexico Animal Shelters — Local Directory</title>
+<meta name="description" content="Animal shelters across New Mexico — adoption, foster, spay/neuter, and lost &amp; found, with phone numbers, addresses, and services.">
+<style>
+  :root { --navy:#12263a; --amber:#f5a623; --paper:#f7f5f0; --ink:#1c2733; --muted:#5b6b7a; --line:#e3ddd2; --green:#1e7a4c; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:var(--paper); line-height:1.5; padding:24px 16px 48px; }
+  .wrap { max-width:860px; margin:0 auto; }
+  header { margin-bottom:20px; }
+  h1 { font-size:28px; color:var(--navy); margin-bottom:6px; }
+  p.sub { color:var(--muted); margin-bottom:4px; }
+  p.count { font-size:14px; color:var(--muted); }
+  .controls { display:flex; flex-wrap:wrap; gap:10px; margin:20px 0; align-items:center; }
+  .controls input[type="search"] { flex:1 1 220px; padding:10px 12px; font-size:16px; border:1px solid var(--line); border-radius:8px; background:#fff; }
+  .filters { display:flex; gap:8px; flex-wrap:wrap; }
+  .filters button { padding:9px 14px; font-size:15px; border:1px solid var(--line); border-radius:999px; background:#fff; color:var(--ink); cursor:pointer; }
+  .filters button.active { background:var(--navy); color:#fff; border-color:var(--navy); }
+  .cards { display:grid; grid-template-columns:1fr; gap:14px; }
+  @media (min-width:640px) { .cards { grid-template-columns:1fr 1fr; } }
+  .card { background:#fff; border:1px solid var(--line); border-radius:12px; padding:18px; display:flex; flex-direction:column; gap:8px; }
+  .card h2 { font-size:19px; color:var(--navy); }
+  .tag { display:inline-block; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; padding:3px 9px; border-radius:999px; background:#eef2f5; color:var(--navy); }
+  .tag.central { background:#e6f4ea; color:#1e7a4c; }
+  .tag.southern { background:#fdf3df; color:#7a5a12; }
+  .services { font-size:15px; color:var(--ink); }
+  .addr { font-size:14px; color:var(--muted); }
+  .contact { margin-top:auto; padding-top:8px; display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+  .call { display:inline-block; background:var(--green); color:#fff; text-decoration:none; font-weight:600; padding:10px 16px; border-radius:8px; font-size:16px; }
+  .contact a.textlink { color:var(--navy); font-size:14px; }
+  .empty { display:none; background:#fff; border:1px solid var(--line); border-radius:12px; padding:24px; text-align:center; color:var(--muted); }
+  .get-listed { background:var(--navy); color:#fff; border-radius:12px; padding:22px; margin-top:28px; }
+  .get-listed h2 { font-size:20px; margin-bottom:8px; }
+  .get-listed p { font-size:15px; opacity:.9; margin-bottom:12px; }
+  .get-listed a { display:inline-block; background:var(--amber); color:var(--navy); text-decoration:none; font-weight:700; padding:10px 16px; border-radius:8px; }
+  .get-listed form { display:grid; grid-template-columns:1fr; gap:10px; margin-top:14px; }
+  @media (min-width:640px) { .get-listed form { grid-template-columns:1fr 1fr; } .get-listed form .full { grid-column:1 / -1; } }
+  .get-listed label { font-size:13px; font-weight:600; opacity:.9; }
+  .get-listed input, .get-listed select, .get-listed textarea { width:100%; padding:10px 12px; font-size:16px; border:1px solid rgba(255,255,255,.25); border-radius:8px; background:#fff; color:var(--ink); margin-top:4px; }
+  .get-listed textarea { min-height:80px; resize:vertical; }
+  .get-listed button[type="submit"] { background:var(--amber); color:var(--navy); font-weight:700; font-size:16px; padding:12px 16px; border:none; border-radius:8px; cursor:pointer; }
+  .get-listed .form-note { font-size:13px; opacity:.75; margin:6px 0 0; }
+  footer { margin-top:28px; font-size:13px; color:var(--muted); }
+  footer a { color:var(--navy); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>New Mexico Animal Shelters</h1>
+    <p class="sub">Animal shelters across New Mexico — adoption, foster, spay/neuter, and lost &amp; found. Real shelters, real phone numbers. Tap to call.</p>
+    <p class="count" id="count"></p>
+  </header>
+
+  <div class="controls">
+    <input type="search" id="search" placeholder="Search by name, city, or service…" aria-label="Search listings">
+    <div class="filters">
+      <button data-filter="all" class="active">All</button>
+      <button data-filter="northern">Northern</button>
+      <button data-filter="central">Central</button>
+      <button data-filter="southern">Southern</button>
+    </div>
+  </div>
+
+  <div class="cards" id="cards">
+    <article class="card" data-region="northern">
+      <h2>Santa Fe Animal Shelter &amp; Humane Society</h2>
+      <div><span class="tag">Northern</span></div>
+      <p class="services">Adoption, foster, behavior &amp; training</p>
+      <p class="addr">100 Caja del Rio Rd, Santa Fe, NM 87507</p>
+      <div class="contact"><a class="call" href="tel:+15059834309">(505) 983-4309</a><a class="textlink" href="http://www.sfhumanesociety.org/">sfhumanesociety.org</a></div>
+    </article>
+
+    <article class="card" data-region="northern">
+      <h2>Farmington Regional Animal Shelter</h2>
+      <div><span class="tag">Northern</span></div>
+      <p class="services">Adoption, transfer, basic medical care</p>
+      <p class="addr">133 Browning Pkwy, Farmington, NM 87401</p>
+      <div class="contact"><a class="call" href="tel:+15055991098">(505) 599-1098</a><a class="textlink" href="http://www.farmingtonnm.gov/animalservices">farmingtonnm.gov</a></div>
+    </article>
+
+    <article class="card" data-region="northern">
+      <h2>Stray Hearts Animal Shelter</h2>
+      <div><span class="tag">Northern</span></div>
+      <p class="services">No-kill adoption, foster, spay/neuter</p>
+      <p class="addr">1200 St Francis Ln, Taos, NM 87571</p>
+      <div class="contact"><a class="call" href="tel:+15757582981">(575) 758-2981</a><a class="textlink" href="http://www.strayhearts.org/">strayhearts.org</a></div>
+    </article>
+
+    <article class="card" data-region="central">
+      <h2>Albuquerque Animal Welfare</h2>
+      <div><span class="tag central">Central</span></div>
+      <p class="services">Adoption, intake &amp; reclaim, low-cost spay/neuter, microchip &middot; Westside shelter at 11800 Sunset Gardens Rd SW</p>
+      <p class="addr">8920 Lomas Blvd NE, Albuquerque, NM 87112</p>
+      <div class="contact"><a class="call" href="tel:+15057681975">(505) 768-1975</a><a class="textlink" href="https://www.cabq.gov/pets">cabq.gov/pets</a></div>
+    </article>
+
+    <article class="card" data-region="central">
+      <h2>Animal Humane New Mexico</h2>
+      <div><span class="tag central">Central</span></div>
+      <p class="services">Adoption, veterinary care</p>
+      <p class="addr">615 Virginia St SE, Albuquerque, NM 87108</p>
+      <div class="contact"><a class="call" href="tel:+15052555523">(505) 255-5523</a><a class="textlink" href="https://animalhumanenm.org/">animalhumanenm.org</a></div>
+    </article>
+
+    <article class="card" data-region="central">
+      <h2>Bernalillo County Animal Care and Resource Center</h2>
+      <div><span class="tag central">Central</span></div>
+      <p class="services">Adoption, spay, rabies vaccine, microchip</p>
+      <p class="addr">3001 2nd St SW, Albuquerque, NM 87105</p>
+      <div class="contact"><a class="call" href="tel:+15053140281">(505) 314-0281</a><a class="textlink" href="https://www.bernco.gov/animal-care-services/">bernco.gov</a></div>
+    </article>
+
+    <article class="card" data-region="southern">
+      <h2>Animal Services Center of the Mesilla Valley</h2>
+      <div><span class="tag southern">Southern</span></div>
+      <p class="services">Adoption, foster</p>
+      <p class="addr">3551 Bataan Memorial W, Las Cruces, NM 88012</p>
+      <div class="contact"><a class="call" href="tel:+15753820018">(575) 382-0018</a><a class="textlink" href="http://ascmv.org/">ascmv.org</a></div>
+    </article>
+
+    <article class="card" data-region="southern">
+      <h2>Roswell Animal Services</h2>
+      <div><span class="tag southern">Southern</span></div>
+      <p class="services">Adoption, foster, rescue</p>
+      <p class="addr">705 E McGaffey St, Roswell, NM 88203</p>
+      <div class="contact"><a class="call" href="tel:+15756246722">(575) 624-6722</a><a class="textlink" href="https://roswell-nm.gov/1250/Animal-Services">roswell-nm.gov</a></div>
+    </article>
+
+    <article class="card" data-region="southern">
+      <h2>Hobbs Animal Adoption Center</h2>
+      <div><span class="tag southern">Southern</span></div>
+      <p class="services">Adoption, foster, free spay/neuter, microchip</p>
+      <p class="addr">702 N Grimes St, Hobbs, NM 88240</p>
+      <div class="contact"><a class="call" href="tel:+15753979323">(575) 397-9323</a><a class="textlink" href="http://hobbsnm.org/animal_adoption_center.html">hobbsnm.org</a></div>
+    </article>
+
+    <article class="card" data-region="southern">
+      <h2>City of Clovis Animal Shelter</h2>
+      <div><span class="tag southern">Southern</span></div>
+      <p class="services">Adoption, stray reclaim</p>
+      <p class="addr">2203 E Brady Ave, Clovis, NM 88101</p>
+      <div class="contact"><a class="call" href="tel:+15757697893">(575) 769-7893</a><a class="textlink" href="tel:+15757691893">adoptions (575) 769-1893</a></div>
+    </article>
+  </div>
+
+  <div class="empty" id="empty">No listings match that search. Try a different name, city, or service.</div>
+
+  <section class="get-listed">
+    <h2>Run an animal shelter or rescue in New Mexico?</h2>
+    <p>Get listed here, free. People across New Mexico search this page when they want to adopt, foster, or find a lost pet. Fill this in and we&rsquo;ll add your shelter.</p>
+    <form action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="dcc7b2d1-d8f4-47bb-8eeb-5653ec09435a">
+      <input type="hidden" name="subject" value="New shelter listing request — New Mexico animal shelters directory">
+      <div>
+        <label for="g-shelter">Shelter name</label>
+        <input id="g-shelter" name="shelter" type="text" required>
+      </div>
+      <div>
+        <label for="g-name">Your name</label>
+        <input id="g-name" name="name" type="text" required>
+      </div>
+      <div>
+        <label for="g-phone">Phone</label>
+        <input id="g-phone" name="phone" type="tel" required>
+      </div>
+      <div>
+        <label for="g-email">Email</label>
+        <input id="g-email" name="email" type="email">
+      </div>
+      <div>
+        <label for="g-type">What kind of shelter</label>
+        <select id="g-type" name="type">
+          <option value="Municipal shelter">Municipal shelter</option>
+          <option value="Nonprofit shelter">Nonprofit shelter</option>
+          <option value="Rescue">Rescue</option>
+          <option value="Sanctuary">Sanctuary</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div>
+        <label for="g-city">City</label>
+        <input id="g-city" name="city" type="text" placeholder="e.g. Gallup, Alamogordo">
+      </div>
+      <div class="full">
+        <label for="g-msg">Anything else? (services, website, hours)</label>
+        <textarea id="g-msg" name="message"></textarea>
+      </div>
+      <div class="full">
+        <button type="submit">Request my free listing</button>
+        <p class="form-note">Submissions go to BusyHands.ai@gmail.com via Web3Forms.</p>
+      </div>
+    </form>
+  </section>
+
+  <footer>
+    <p>Public shelter listings gathered November 2026. Phone numbers and addresses are public listings — call to confirm before you go. A project by <a href="mailto:BusyHands.ai@gmail.com">BusyHands AI</a> — the free lead-response tool for local businesses.</p>
+  </footer>
+</div>
+
+<script>
+  const search = document.getElementById('search');
+  const cards = Array.from(document.querySelectorAll('.card'));
+  const empty = document.getElementById('empty');
+  const count = document.getElementById('count');
+  const buttons = document.querySelectorAll('.filters button');
+  let region = 'all';
+
+  function apply() {
+    const q = search.value.trim().toLowerCase();
+    let shown = 0;
+    cards.forEach(c => {
+      const okRegion = region === 'all' || c.dataset.region === region;
+      const okText = !q || c.textContent.toLowerCase().includes(q);
+      const show = okRegion && okText;
+      c.style.display = show ? '' : 'none';
+      if (show) shown++;
+    });
+    empty.style.display = shown === 0 ? 'block' : 'none';
+    count.textContent = shown + (shown === 1 ? ' listing' : ' listings');
+  }
+
+  search.addEventListener('input', apply);
+  buttons.forEach(b => b.addEventListener('click', () => {
+    buttons.forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    region = b.dataset.filter;
+    apply();
+  }));
+  apply();
+</script>
+</body>
+</html>
